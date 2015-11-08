@@ -14,7 +14,7 @@ extern "C" {
 
 #include "../connection/connection.h"
 
-    Connection* connect(char* addr, int port);
+    Connection* connect_to_server(char* addr, int port);
 
 #ifdef	__cplusplus
 }

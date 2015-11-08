@@ -14,14 +14,12 @@ extern "C" {
     
 #include "../connection/connection.h"
     
-    struct Server;
-    
     typedef struct Server Server;
     
-    
-    Server* create(char* addr, int port);
-    Connection* accept(Server* server);
-    int shutdown(Server* server);
+    Server* create_server(int port);
+    int  listen_port(Server* server);
+    Connection* accept_connection(Server* server);
+    int shutdown_server(Server* server);
     
     
     

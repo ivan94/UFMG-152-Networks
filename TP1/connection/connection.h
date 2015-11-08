@@ -12,12 +12,15 @@
 extern "C" {
 #endif
 
+#include <netinet/in.h>
+    
     struct Connection;
     typedef struct Connection Connection;
     
-    Connection* create(int sock_id);
-    char* receive(int buffer_size);
-    char* send(char* buffer, int buffer_size);
+    Connection* create_connection(int sock_id, struct sockaddr_in* addr);
+    void receive_data(Connection* con, char* buffer, int buffer_size);
+    void send_data(Connection* con, char* buffer, int buffer_size);
+    int close_connection(Connection* con);
 
 
 #ifdef	__cplusplus

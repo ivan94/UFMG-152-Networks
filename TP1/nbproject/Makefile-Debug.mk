@@ -35,7 +35,11 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/client/client.o \
+	${OBJECTDIR}/connection/connection.o \
+	${OBJECTDIR}/main_client.o \
+	${OBJECTDIR}/main_server.o \
+	${OBJECTDIR}/server/server.o
 
 
 # C Compiler Flags
@@ -62,10 +66,30 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tp1: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/tp1 ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/main.o: main.c 
+${OBJECTDIR}/client/client.o: client/client.c 
+	${MKDIR} -p ${OBJECTDIR}/client
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/client/client.o client/client.c
+
+${OBJECTDIR}/connection/connection.o: connection/connection.c 
+	${MKDIR} -p ${OBJECTDIR}/connection
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/connection/connection.o connection/connection.c
+
+${OBJECTDIR}/main_client.o: main_client.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main_client.o main_client.c
+
+${OBJECTDIR}/main_server.o: main_server.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main_server.o main_server.c
+
+${OBJECTDIR}/server/server.o: server/server.c 
+	${MKDIR} -p ${OBJECTDIR}/server
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/server/server.o server/server.c
 
 # Subprojects
 .build-subprojects:

@@ -15,7 +15,11 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>main.c</itemPath>
+      <itemPath>client/client.c</itemPath>
+      <itemPath>connection/connection.c</itemPath>
+      <itemPath>main_client.c</itemPath>
+      <itemPath>main_server.c</itemPath>
+      <itemPath>server/server.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -39,11 +43,19 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="client/client.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="client/client.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="connection/connection.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="connection/connection.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="main.c" ex="false" tool="0" flavor2="0">
+      <item path="main_client.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="main_server.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="server/server.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="server/server.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -68,11 +80,19 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="client/client.c" ex="false" tool="0" flavor2="0">
+      </item>
       <item path="client/client.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="connection/connection.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="connection/connection.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="main.c" ex="false" tool="0" flavor2="0">
+      <item path="main_client.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="main_server.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="server/server.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="server/server.h" ex="false" tool="3" flavor2="0">
       </item>
