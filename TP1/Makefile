@@ -7,19 +7,19 @@ OBJS=client/client.o connection/connection.o server/server.o
 	@echo '$< built.'
 	@echo ' '
 
-all: client server
+all: client.exe server.exe
 
-client: $(OBJS) main_client.o
+client.exe: $(OBJS) main_client.o
 	@echo 'Building target $@'
 	@echo 'Linking objects'
-	$(CC) -o "$@.exe" $(OBJS) main_client.o
+	$(CC) -o "$@" $(OBJS) main_client.o
 	@echo 'Target $@ built'
 	@echo ' '
 
-server: $(OBJS) main_server.o
+server.exe: $(OBJS) main_server.o
 	@echo 'Building target $@'
 	@echo 'Linking objects'
-	$(CC) -o "$@.exe" $(OBJS) main_server.o
+	$(CC) -o "$@" $(OBJS) main_server.o
 	@echo 'Target $@ built'
 	@echo ' '
 
