@@ -2,5 +2,8 @@ nbproject/private
 /TP1/build/
 /TP1/dist/
 
+tests/
+:*
+
 *.o
 *.exe

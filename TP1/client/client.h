@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   client.h
  * Author: ivan
  *
@@ -14,6 +14,12 @@ extern "C" {
 
 #include "../connection/connection.h"
 
+    /**
+     * Try to connect to the server specified. It supports both IPv4 and IPv6
+     * @param  addr Server ip address
+     * @param  port Port to connect to
+     * @return      Pointer to connection object
+     */
     Connection* connect_to_server(char* addr, int port);
 
 #ifdef	__cplusplus
@@ -21,4 +27,3 @@ extern "C" {
 #endif
 
 #endif	/* CLIENT_H */
-

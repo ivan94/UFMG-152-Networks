@@ -12,19 +12,19 @@
 typedef struct Server Server;
 struct Server{
     int socket;
-    struct sockaddr_in addr;
+    struct sockaddr_in6 addr;
 };
 
 
 Server* create_server(int port){
     Server* server = (Server*) malloc(sizeof(Server));
 
-    bzero(&(server->addr), sizeof(Server));
-    server->addr.sin_addr.s_addr = INADDR_ANY;
-    server->addr.sin_family = AF_INET;
-    server->addr.sin_port = htons(port);
+    bzero(server, sizeof(Server));
+    server->addr.sin6_addr = in6addr_any;
+    server->addr.sin6_family = AF_INET6;
+    server->addr.sin6_port = htons(port);
 
-    server->socket = socket(AF_INET, SOCK_STREAM, 0);
+    server->socket = socket(AF_INET6, SOCK_STREAM, 0);
 
     bind(server->socket, (struct sockaddr*)&(server->addr), sizeof(server->addr));
 
@@ -36,11 +36,9 @@ int listen_port(Server* server){
 }
 
 Connection* accept_connection(Server* server){
-    struct sockaddr_in* client_addr = (struct sockaddr_in*) malloc(sizeof(struct sockaddr_in));
-    int len = sizeof(struct sockaddr_in);
+    struct sockaddr_in6* client_addr = (struct sockaddr_in6*) malloc(sizeof(struct sockaddr_in6));
+    int len = sizeof(struct sockaddr_in6);
     int client_socket = accept(server->socket, (struct sockaddr*) client_addr, (socklen_t*)&len);
-
-    printf("CONNECTED: %s\n", inet_ntoa(client_addr->sin_addr));
 
     return create_connection(client_socket, client_addr);
 }
