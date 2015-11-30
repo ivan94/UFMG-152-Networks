@@ -101,11 +101,13 @@ int main(int argc, char** argv) {
     receive_greet(con);
     send_greet_ack(con);
 
+
+    //Receive folder anem
     char buffer[MAX_MSG];
     receive_msg(con, buffer);
     send_ack(con);
 
-    char filename[MAX_MSG];
+    char filename[100];
     strcpy(filename, client_addr);
     strcat(filename, buffer);
 
@@ -114,40 +116,32 @@ int main(int argc, char** argv) {
         filename[i] = filename[i] == '/'? '.': filename[i];
     }
 
-    char filebuffer[MAX_MSG];
+    char* filebuffer = calloc(sizeof(char), MAX_MSG);
+    int filebuffer_size = MAX_MSG;
+    filebuffer[0] = '\0';
 
-    receive_msg(con, filebuffer);
-    send_ack(con);
+    int usedbuffer = 0;
 
-    // char* filebuffer = (char*) malloc(sizeof(char)*1000);
-    // int filebuffer_size = 1000;
-    // filebuffer[0] = '\0';
-    //
-    // int usedbuffer = 0;
-    //
-    // while(receive_msg(con, buffer)){
-    //     usedbuffer += strlen(buffer)+2;
-    //     if(usedbuffer > filebuffer_size){
-    //         filebuffer_size *= 2;
-    //         filebuffer = (char*) realloc(filebuffer, sizeof(char)*filebuffer_size);
-    //     }
-    //     sprintf(filebuffer, "%s%s\n", filebuffer, buffer);
-    //     send_ack(con);
-    // }
-    //
-
-    char b[30];
-    if(receive_msg(con, b)){
-        printf("Protocol error: Expecting farewell message\n");
+    //receive filenames
+    while(receive_msg(con, buffer)){
+        usedbuffer += strlen(buffer)+1;
+        if(usedbuffer > filebuffer_size){
+            filebuffer_size *= 2;
+            filebuffer = (char*) realloc(filebuffer, sizeof(char)*filebuffer_size*2);
+        }
+        printf("%s\n", buffer);
+        sprintf(filebuffer, "%s%s\n", filebuffer, buffer);
+        send_ack(con);
     }
 
     shutdown_server(server);
+    close_connection(con);
 
     FILE* f = fopen(filename, "w");
     fprintf(f, "%s", filebuffer);
     fclose(f);
 
-    //free(filebuffer);
+    free(filebuffer);
 
 
     return 0;
