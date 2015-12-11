@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
         select(FD_SETSIZE, &set, NULL, NULL, NULL);
 
         if(FD_ISSET(s, &set)){
-            receive_message(s, buffer, from, 100, &port);
+            receive_message(s, buffer, from, 50, &port);
             process_received_msg(buffer);
         }else if(FD_ISSET(STDIN_FILENO, &set)){
             fgets(buffer, 2000, stdin);
