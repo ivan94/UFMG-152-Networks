@@ -106,7 +106,9 @@ int register_user(Socket s, char* address, int port, char* username){
 }
 
 int process_user_input(Socket s, char* addr, int port, char* input){
+    //Determina se o input é um comando uma mensagem
     if(input[0] == '/'){
+        //Executa o comando
         char command[100];
         bzero(command, 100);
         sscanf(input, "%s", command);
@@ -124,6 +126,7 @@ int process_user_input(Socket s, char* addr, int port, char* input){
         }else if(!strcmp(command, "/close")){
             return close_connection(s, addr, port);
         }else{
+            //Lista os comandos disponiveis
             printf("Lista de comandos\n");
             printf("%-30s %s", "/mute <username>", "Para de receber mensagens do usuario\n");
             printf("%-30s %s", "/unmute <username>", "Volta a receber mensagens do usuario\n");
@@ -132,6 +135,7 @@ int process_user_input(Socket s, char* addr, int port, char* input){
             return 1;
         }
     }else{
+        //Envia a mensagem para o servidor
         char buffer[2000];
         bzero(buffer, 2000);
         sprintf(buffer, "POST %s", input);
@@ -155,6 +159,7 @@ int process_user_input(Socket s, char* addr, int port, char* input){
 }
 
 void process_received_msg(char* msg){
+    //Processa e imprime a mensagem do servidor
     char command[10];
     sscanf(msg, "%s", command);
     if(!strcmp(command, "NEW")){
