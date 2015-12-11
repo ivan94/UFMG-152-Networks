@@ -1,13 +1,13 @@
 CC=gcc
 CFLAGS=-c -Wall -g
-OBJS=client/client.o connection/connection.o server/server.o
+OBJS=src/socket/socket.o src/server/server.o src/client/client.o
 %.o: %.c
 	@echo 'Building $<'
 	$(CC) $(CFLAGS) "$<" -o "$@"
 	@echo '$< built.'
 	@echo ' '
 
-all: client.exe server.exe testgen
+all: server client
 
 client.exe: $(OBJS) main_client.o
 	@echo 'Building target $@'
@@ -16,19 +16,19 @@ client.exe: $(OBJS) main_client.o
 	@echo 'Target $@ built'
 	@echo ' '
 
-server.exe: $(OBJS) main_server.o
+server: $(OBJS) src/servermain.o
 	@echo 'Building target $@'
 	@echo 'Linking objects'
-	$(CC) -o "$@" $(OBJS) main_server.o
+	$(CC) -o "$@" $(OBJS) src/servermain.o
 	@echo 'Target $@ built'
 	@echo ' '
 
-testgen: testgen.o
+client: $(OBJS) src/clientmain.o
 	@echo 'Building target $@'
 	@echo 'Linking objects'
-	$(CC) -o "$@" testgen.o
+	$(CC) -o "$@" $(OBJS) src/clientmain.o
 	@echo 'Target $@ built'
 	@echo ' '
 
 clean:
-	rm -rf $(OBJS) main_client.o main_server.o client.exe server.exe testgen
+	rm -rf $(OBJS) src/clientmain.o src/servermain.o client server

@@ -1,0 +1,1 @@
+gmake: *** No rule to make target 'client/client.o', needed by 'client.exe'.  Stop.
