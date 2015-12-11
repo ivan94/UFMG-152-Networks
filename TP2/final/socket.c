@@ -105,7 +105,7 @@ int receive_message(Socket socket, char* buf, char* from, int from_buf_size, int
     tv.tv_usec = 0;
     setsockopt(socket, SOL_SOCKET, SO_RCVTIMEO, (char*)&tv, sizeof(struct timeval));
 
-    struct sockaddr addr;
+    struct sockaddr_in6 addr;
     int len = sizeof(addr);
 
     int b = recvfrom((int)socket, buf, MAX_MSG_SIZE, 0, (struct sockaddr*)&addr, (socklen_t*)&len);
@@ -121,7 +121,7 @@ int receive_message(Socket socket, char* buf, char* from, int from_buf_size, int
     }
 
     char fromport_s[10];
-    getnameinfo(&addr, (socklen_t)len, from, from_buf_size, fromport_s, sizeof(fromport_s), NI_DGRAM | NI_NUMERICHOST | NI_NUMERICSERV);
+    getnameinfo((struct sockaddr*)&addr, (socklen_t)len, from, from_buf_size, fromport_s, sizeof(fromport_s), NI_DGRAM | NI_NUMERICHOST | NI_NUMERICSERV);
 
     *fromport = atoi(fromport_s);
 
