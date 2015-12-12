@@ -6,6 +6,16 @@
         <in>udpclient.c</in>
         <in>udpserver.c</in>
       </df>
+      <df name="final">
+        <in>client.c</in>
+        <in>client.h</in>
+        <in>clientmain.c</in>
+        <in>server.c</in>
+        <in>server.h</in>
+        <in>servermain.c</in>
+        <in>socket.c</in>
+        <in>socket.h</in>
+      </df>
       <df name="src">
         <df name="client">
           <in>client.c</in>
