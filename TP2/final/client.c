@@ -81,6 +81,10 @@ int close_connection(Socket s, char* addr, int port){
 }
 
 int register_user(Socket s, char* address, int port, char* username){
+    if(strlen(username) > 16){
+        printf("Username muito grande, max 16 caracteres\n");
+        return -1;
+    }
     char buffer[2000];
     bzero(buffer, 2000);
 
@@ -135,6 +139,10 @@ int process_user_input(Socket s, char* addr, int port, char* input){
             return 1;
         }
     }else{
+        if(strlen(input) > 500){
+            printf("Mensagem muito longa, max 500 caracteres\n");
+            return 1;
+        }
         //Envia a mensagem para o servidor
         char buffer[2000];
         bzero(buffer, 2000);
